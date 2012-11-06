@@ -24,19 +24,7 @@ Before do
 		@c = ScormCloud::ScormCloud.new($scorm_cloud_appid,$scorm_cloud_secret)
 	end
 
-	# Cleanup all courses
-	@c.course.get_course_list.each do |course|
-		@c.course.delete_course(course.id)
-	end
-	@c.course.get_course_list.count.should eq(0)
-
 	unless @last_uploaded_file
-
-		# Cleanup all zip packages
-		@c.upload.list_files.each do |file|
-			@c.upload.delete_files(file[:file])
-		end
-		raise "Cannot delete files" unless @c.upload.list_files.length == 0
 
 		# Upload one we can use for testing
 		token = @c.upload.get_upload_token
