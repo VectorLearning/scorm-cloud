@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "scorm_cloud"
   s.version     = ScormCloud::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Aura Software"]
+  s.authors     = ["Aura Software", "Ken Richard"]
   s.email       = ["support@aura-software.com"]
   s.homepage    = ""
   s.summary     = %q{Rustici Scorm Cloud Web Service API Wrapper}
