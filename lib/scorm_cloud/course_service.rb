@@ -9,7 +9,7 @@ module ScormCloud
 		def import_course(course_id, path)
 			xml = connection.call("rustici.course.importCourse", :courseid => course_id, :path => path)
 			if xml.elements['//rsp/importresult'].attributes["successful"] == "true"
-				title = xml.elements['//rsp/importresult/title'].text	
+				title = xml.elements['//rsp/importresult/title'].text
 				{ :title => title, :warnings => [] }
 			else
 				nil
@@ -37,6 +37,11 @@ module ScormCloud
 		def get_course_list(options = {})
 			xml = connection.call("rustici.course.getCourseList", options)
 			xml.elements["/rsp/courselist"].map { |e| Course.from_xml(e) }
+		end
+
+		def get_course_detail(course_id)
+			xml = connection.call("rustici.course.getCourseDetail", :courseid => course_id)
+			Course.from_xml(xml.elements["/rsp/course"])
 		end
 
 		def preview(course_id, redirect_url)
