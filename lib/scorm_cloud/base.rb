@@ -16,7 +16,7 @@ module ScormCloud
 		def call_raw(method, params = {})
 			url = prepare_url(method, params)
 			execute_call_plain(url)
-		end			
+		end
 
 		def call_url(url)
 			execute_call_plain(url)
@@ -49,14 +49,13 @@ module ScormCloud
 			params[:method] = method
 			params[:appid] = @appid
 			params[:ts] = timestamp
-			html_params = params.map { |k,v| "#{k.to_s}=#{v}" }.join("&")
-
 			raw = @secret + params.keys.
 					sort{ |a,b| a.to_s.downcase <=> b.to_s.downcase }.
 					map{ |k| "#{k.to_s}#{params[k]}" }.
 					join
 
 			sig = Digest::MD5.hexdigest(raw)
+			html_params = params.map { |k,v| "#{k.to_s}=#{URI::escape(v)}" }.join("&")
 			"http://cloud.scorm.com/api?#{html_params}&sig=#{sig}"
 		end
 
@@ -82,7 +81,7 @@ module ScormCloud
 			end
 		end
 
-	
+
 		# Create an exception with code & message
 		def create_error(doc, url)
 			err = doc.elements["rsp"].elements["err"]
@@ -96,7 +95,7 @@ module ScormCloud
 		def self.add_service(hash)
 			hash.each do |name, klass|
 				define_method(name) do
-					service = instance_variable_get("@#{name.to_s}") 
+					service = instance_variable_get("@#{name.to_s}")
 					unless service
 						service = instance_variable_set("@#{name.to_s}", klass.new(self))
 					end
