@@ -56,7 +56,7 @@ module ScormCloud
 
 			sig = Digest::MD5.hexdigest(raw)
 			html_params = params.map { |k,v| "#{k.to_s}=#{URI::escape(v)}" }.join("&")
-			"http://cloud.scorm.com/api?#{html_params}&sig=#{sig}"
+			"#{ENV['SCORM_CLOUD_URL']}/api?#{html_params}&sig=#{sig}"
 		end
 
 

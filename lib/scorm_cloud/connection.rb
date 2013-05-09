@@ -14,7 +14,7 @@ module ScormCloud
 		def call_raw(method, params = {})
 			url = prepare_url(method, params)
 			execute_call_plain(url)
-		end			
+		end
 
 		# Get plain response body and parse the XML doc
 		def execute_call_xml(url)
@@ -51,7 +51,7 @@ module ScormCloud
 					join
 
 			sig = Digest::MD5.hexdigest(raw)
-			"http://cloud.scorm.com/api?#{html_params}&sig=#{sig}"
+			"#{ENV['SCORM_CLOUD_URL']}/api?#{html_params}&sig=#{sig}"
 		end
 
 

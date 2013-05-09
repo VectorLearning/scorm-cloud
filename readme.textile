@@ -1,6 +1,6 @@
 h1. Rustici SCORM Cloud Ruby Client
 
-This ruby gem is provides a ruby interface to the Rustici Scorm Cloud.
+This ruby gem is provides a ruby interface to the Rustici Local Web Services version of SCORM Cloud.
 
 h2. Shell CLI Interface
 
@@ -17,7 +17,7 @@ h2. Ruby on Rails Use
 
 _Place the following in: Gemfile_
 
-bc. require 'scorm_cloud', :git => 'git@github.com:aeseducation/scorm-cloud.git'
+bc. require 'scorm_cloud', :git => 'git@github.com:jasonpaluck/scorm-cloud.git'
 
 _Place the following in: config/initializers/scorm_cloud.rb_
 
