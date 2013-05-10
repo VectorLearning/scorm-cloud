@@ -8,9 +8,8 @@ module ScormCloud
 		# TODO: Handle Warnings
 		def import_course(course_id, path)
 			xml = connection.call("rustici.course.importCourse", :courseid => course_id, :path => path)
-			if xml.elements['//rsp/importresult'].attributes["successful"] == "true"
-				title = xml.elements['//rsp/importresult/title'].text
-				{ :title => title, :warnings => [] }
+			if xml.elements['//rsp'].attributes["stat"] == "ok"
+				{ :warnings => [] }
 			else
 				nil
 			end
