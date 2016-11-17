@@ -51,7 +51,7 @@ module ScormCloud
 					join
 
 			sig = Digest::MD5.hexdigest(raw)
-			"#{ENV['SCORM_CLOUD_URL']}/api?#{html_params}&sig=#{sig}"
+			"#{origin}/api?#{html_params}&sig=#{sig}"
 		end
 
 
@@ -63,5 +63,10 @@ module ScormCloud
 			"Error In Scorm Cloud: Error=#{code} Message=#{msg}"
 		end
 
+		private
+
+		def origin
+			ENV["SCORM_CLOUD_URL"] || "http://cloud.scorm.com"
+		end
 	end
 end

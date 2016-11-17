@@ -43,6 +43,10 @@ module ScormCloud
 
 	private
 
+		def origin
+			ENV["SCORM_CLOUD_URL"] || "http://cloud.scorm.com"
+		end
+
 		# Get the URL for the call
 		def prepare_url(method, params = {})
 			timestamp = Time.now.utc.strftime('%Y%m%d%H%M%S')
@@ -56,7 +60,7 @@ module ScormCloud
 
 			sig = Digest::MD5.hexdigest(raw)
 			html_params = URI.encode_www_form(params)
-			"#{ENV['SCORM_CLOUD_URL']}/api?#{html_params}&sig=#{sig}"
+			"#{origin}/api?#{html_params}&sig=#{sig}"
 		end
 
 
