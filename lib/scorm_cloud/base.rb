@@ -28,7 +28,9 @@ module ScormCloud
 			File.open(path) do |f|
   				req = Net::HTTP::Post::Multipart.new "#{url.path}?#{url.query}",
     				"file" => UploadIO.new(f, "application/zip", "scorm.zip")
-  				res = Net::HTTP.start(url.host, url.port) do |http|
+          request = Net::HTTP.new(url.host, url.port)
+          request.use_ssl = true if uri.scheme == 'https'
+          res = request.start do |http|
     				http.request(req)
   				end
   				body = res.body
