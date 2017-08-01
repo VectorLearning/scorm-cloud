@@ -13,6 +13,10 @@ module ScormCloud
 			xml.elements["/rsp/location"].text
 		end
 
+		def upload_url(token)
+			connection.launch_url("rustici.upload.uploadFile", :token => token)
+		end
+
 		def list_files
 			xml = connection.call("rustici.upload.listFiles")
 			xml.elements["//rsp/dir"].map do |f|
